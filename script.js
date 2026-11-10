@@ -70,17 +70,15 @@ const confettiLayer = document.getElementById("confettiLayer");
    3. BACKGROUND BIRTHDAY MUSIC
 ========================================= */
 
-// Change the path if your audio filename is different.
 const birthdayAudio = new Audio("assets/audio/birthday-song.mp3");
 
-// Music settings
 birthdayAudio.loop = true;
 birthdayAudio.volume = 0.5;
 birthdayAudio.preload = "auto";
 
 let birthdayOpened = false;
 
-/* Store the indexes of memories that have been revealed. */
+/* Store revealed memories. */
 const revealedMemories = new Set();
 
 /* =========================================
@@ -94,7 +92,7 @@ if (startButton) {
     birthdayOpened = true;
     startButton.disabled = true;
 
-    /* START BACKGROUND MUSIC */
+    /* Start birthday music. */
     birthdayAudio.play().catch((error) => {
       console.error("Unable to play birthday music:", error);
     });
@@ -107,9 +105,7 @@ if (startButton) {
       welcomeScreen.classList.add("leaving");
     }
 
-    /*
-      Start the envelope and cake animations together.
-    */
+    /* Start envelope and cake animations together. */
     requestAnimationFrame(() => {
       requestAnimationFrame(() => {
         if (envelope) {
@@ -138,44 +134,38 @@ if (startButton) {
 }
 
 /* =========================================
-   5. REVEAL A PHOTO AT THE CLICKED EMOJI
+   5. REVEAL A PHOTO AND MESSAGE AT THE
+      CLICKED EMOJI POSITION
 ========================================= */
 
 function revealMemory(index, button) {
-  /*
-    Validate the memory index and clicked button.
-  */
+
   if (
     !Number.isInteger(index) ||
     !memories[index] ||
-    !button
+    !button ||
+    !floatingPlayground
   ) {
     return;
   }
 
-  /*
-    If this memory was already revealed,
-    do not create a duplicate photo.
-  */
+  /* Prevent duplicate photo creation. */
   if (revealedMemories.has(index)) {
     return;
   }
 
   const memory = memories[index];
 
-  /*
-    Create the small square photo block.
-  */
+  /* Create the photo block. */
   const photoBlock = document.createElement("div");
 
   photoBlock.className = "memory-photo-block";
   photoBlock.dataset.photoIndex = String(index);
+
   photoBlock.setAttribute("role", "group");
   photoBlock.setAttribute("aria-label", memory.title);
 
-  /*
-    Copy the emoji button's position and size.
-  */
+  /* Copy the original emoji position and size. */
   const buttonStyle = window.getComputedStyle(button);
 
   photoBlock.style.position = "absolute";
@@ -190,9 +180,7 @@ function revealMemory(index, button) {
   photoBlock.style.margin = buttonStyle.margin;
   photoBlock.style.zIndex = "4";
 
-  /*
-    Create the photo.
-  */
+  /* Create the photo. */
   const photo = document.createElement("img");
 
   photo.src = memory.image;
@@ -200,54 +188,74 @@ function revealMemory(index, button) {
   photo.loading = "eager";
   photo.draggable = false;
 
-  /*
-    Create the caption.
-  */
+  /* Create the message caption. */
   const caption = document.createElement("span");
 
   caption.className = "memory-photo-caption";
   caption.textContent = memory.title;
 
+  /*
+    IMPORTANT:
+    Make the message visible immediately.
+    No hover, second click or extra touch needed.
+  */
+
+  caption.style.setProperty("display", "block", "important");
+  caption.style.setProperty("opacity", "1", "important");
+  caption.style.setProperty("visibility", "visible", "important");
+  caption.style.setProperty("transform", "none", "important");
+  caption.style.setProperty("transition", "none", "important");
+
+  caption.style.setProperty("pointer-events", "none", "important");
+
+  /* Add photo and message together. */
   photoBlock.append(photo, caption);
 
-  /*
-    Place the photo in the same playground.
-  */
-  if (floatingPlayground) {
-    floatingPlayground.appendChild(photoBlock);
-  } else {
-    return;
-  }
+  /* Insert into the same playground. */
+  floatingPlayground.appendChild(photoBlock);
 
-  /*
-    Hide the original emoji.
-  */
+  /* Hide the original emoji. */
   revealedMemories.add(index);
 
   button.classList.add("memory-emoji-hidden");
   button.setAttribute("aria-hidden", "true");
   button.disabled = true;
 
+  /*
+    Even if the user clicks the revealed photo,
+    the message stays visible immediately.
+  */
+
+  photoBlock.addEventListener("click", () => {
+    caption.style.setProperty("opacity", "1", "important");
+    caption.style.setProperty("visibility", "visible", "important");
+  });
+
+  /* Celebration effect. */
   launchConfetti(12);
 
-  /*
-    Handle missing images.
-  */
+  /* Handle missing images. */
   photo.addEventListener("error", () => {
-    photoBlock.classList.add("memory-photo-error");
-    photo.alt = "Photo unavailable";
 
+    photoBlock.classList.add("memory-photo-error");
+
+    photo.alt = "Photo unavailable";
     photo.style.display = "none";
 
     const fallback = document.createElement("span");
 
     fallback.className = "memory-photo-fallback";
     fallback.textContent = "♡";
+
     fallback.setAttribute("aria-label", "Photo unavailable");
 
     photoBlock.insertBefore(fallback, caption);
 
-    console.error("Could not load memory image:", memory.image);
+    console.error(
+      "Could not load memory image:",
+      memory.image
+    );
+
   }, { once: true });
 }
 
@@ -257,11 +265,15 @@ function revealMemory(index, button) {
 
 document.querySelectorAll(".float-item[data-memory]")
   .forEach((button) => {
+
     button.addEventListener("click", () => {
+
       const index = Number(button.dataset.memory);
 
       revealMemory(index, button);
+
     });
+
   });
 
 /* =========================================
@@ -278,7 +290,9 @@ const wishes = [
 ];
 
 if (wishButton && wishResult) {
+
   wishButton.addEventListener("click", () => {
+
     const randomIndex = Math.floor(Math.random() * wishes.length);
 
     wishResult.textContent = wishes[randomIndex];
@@ -286,7 +300,9 @@ if (wishButton && wishResult) {
     wishButton.textContent = "✨ Make another wish ✨";
 
     launchConfetti(55);
+
   });
+
 }
 
 /* =========================================
@@ -294,6 +310,7 @@ if (wishButton && wishResult) {
 ========================================= */
 
 function launchConfetti(amount = 40) {
+
   if (!confettiLayer) return;
 
   const count = Math.min(Math.max(amount, 0), 100);
@@ -308,6 +325,7 @@ function launchConfetti(amount = 40) {
   ];
 
   for (let i = 0; i < count; i++) {
+
     const piece = document.createElement("span");
 
     piece.className = "confetti-piece";
@@ -334,6 +352,7 @@ function launchConfetti(amount = 40) {
     window.setTimeout(() => {
       piece.remove();
     }, 5000);
+
   }
 }
 
@@ -342,12 +361,16 @@ function launchConfetti(amount = 40) {
 ========================================= */
 
 document.querySelectorAll("img").forEach((img) => {
+
   img.addEventListener("error", () => {
+
     console.error(
       "Could not load image:",
       img.getAttribute("src")
     );
+
   });
+
 });
 
 /* =========================================
@@ -355,3 +378,4 @@ document.querySelectorAll("img").forEach((img) => {
 ========================================= */
 
 console.log("Birthday surprise website is ready! 💗");
+

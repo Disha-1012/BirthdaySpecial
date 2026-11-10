@@ -1632,6 +1632,10 @@ footer p {
 /* Captions appear just below the square, not
    over the image. */
 
+/* =========================================
+   MEMORY PHOTO CAPTION — ALWAYS VISIBLE
+========================================= */
+
 .memory-photo-caption {
   position: absolute;
   top: calc(100% + 5px);
@@ -1655,10 +1659,9 @@ footer p {
 
   box-shadow: 0 3px 10px #b66b8d12;
 
-  opacity: 0;
+  opacity: 1;
+  visibility: visible;
   pointer-events: none;
-
-  transition: opacity .2s ease;
 }
 
 /* Show the caption when the photo is hovered. */
