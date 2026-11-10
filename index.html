@@ -1,0 +1,318 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#fff0f5">
+  <meta name="description" content="A beautiful birthday surprise made just for you.">
+
+  <title>A Little Birthday Magic 💗</title>
+
+  <!-- IMPORTANT: This filename must be style.css -->
+  <link rel="stylesheet" href="./style.css">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+  <!-- FIRST SCREEN: ONLY ONE BUTTON -->
+  <section class="welcome-screen" id="welcomeScreen">
+    <div class="welcome-glow"></div>
+
+    <div class="welcome-content">
+      <div class="welcome-heart">♡</div>
+
+      <p class="welcome-label">A LITTLE SOMETHING FOR HAMMPPU</p>
+
+      <h1>Blink twice<br><em>if you're ready</em></h1>
+
+      <p class="welcome-description">
+        Just another way to search Natural Blush, pick a Smile before enjoying it 💌
+      </p>
+
+      <button class="start-button" id="startButton" type="button">
+        <span>Click Me!</span>
+        <span class="button-heart">♥</span>
+      </button>
+
+      <p class="welcome-footer">FROM MAMMPPU ✨</p>
+    </div>
+
+    <span class="welcome-decoration decor-one">✦</span>
+    <span class="welcome-decoration decor-two">♡</span>
+    <span class="welcome-decoration decor-three">✧</span>
+    <span class="welcome-decoration decor-four">✿</span>
+  </section>
+
+
+  <!-- BIRTHDAY WEBSITE: HIDDEN UNTIL THE FIRST CLICK -->
+  <main id="birthdayWebsite" hidden>
+
+    <header class="topbar">
+      <a href="#home" class="brand">To<span>♥</span>Hampu</a>
+      <span class="topbar-note">A little surprise, made with love ✨</span>
+    </header>
+
+
+    <!-- HERO: ENVELOPE, SQUARE PHOTO AND CAKE -->
+    <section class="hero section" id="home">
+
+      <div class="hero-copy">
+
+        <span class="eyebrow">
+          ✦ A SPECIAL DAY FOR A SPECIAL PERSON ✦
+        </span>
+
+        <h2 class="hero-heading">
+          <br>
+          Live beautiful<em> moments </em> with love.
+        </h2>
+
+        <p class="hero-subtitle">
+          💗
+        </p>
+
+        <div class="envelope-stage">
+
+          <div class="envelope-glow"></div>
+
+          <!-- ENVELOPE -->
+          <div class="envelope" id="envelope">
+
+            <div class="envelope-back"></div>
+
+            <!-- LETTER SLIDES UP FROM INSIDE -->
+            <div class="letter">
+              <div class="letter-content">
+
+                <span class="letter-kicker">A LITTLE NOTE FOR YOU</span>
+
+                <div class="hero-photo-frame">
+                  <img
+                    src="assets/images/hero.jpeg"
+                    alt="Your special birthday photo"
+                  >
+                  <span class="photo-sparkle">✦</span>
+                </div>
+
+                <h3>Happy Birthday! 🎂</h3>
+
+                <p>To someone who makes life a little brighter.</p>
+
+              </div>
+            </div>
+
+            <!-- FLAP OPENS BACKWARDS -->
+            <div class="envelope-flap"></div>
+
+            <!-- FRONT PANELS COVER THE LETTER'S LOWER EDGE -->
+            <div class="envelope-front-left"></div>
+            <div class="envelope-front-right"></div>
+            <div class="envelope-front-bottom"></div>
+
+            <div class="envelope-seal">♥</div>
+
+          </div>
+
+          <!-- BIRTHDAY CAKE -->
+          <div class="cake" id="cake" aria-label="Birthday cake">
+
+            <div class="cake-candle">
+              <span class="flame"></span>
+            </div>
+
+            <div class="cake-top"></div>
+            <div class="cake-middle"><span>♥ ♥ ♥</span></div>
+            <div class="cake-bottom"></div>
+            <div class="cake-plate"></div>
+
+            <span class="cake-spark cake-spark-one">✦</span>
+            <span class="cake-spark cake-spark-two">✧</span>
+
+          </div>
+
+        </div>
+
+        <p class="hero-caption">
+          A little envelope. A little cake. A whole lot of love. 💌
+        </p>
+
+      </div>
+
+      <span class="hero-decoration decoration-heart">♡</span>
+      <span class="hero-decoration decoration-star">✦</span>
+      <span class="hero-decoration decoration-spark">✧</span>
+      <span class="hero-decoration decoration-flower">✿</span>
+
+    </section>
+
+
+    <!-- MEMORIES: PHOTOS APPEAR INSIDE THIS SECTION -->
+    
+<!-- MEMORIES SECTION: EMOJIS TRANSFORM INTO PHOTOS -->
+<section class="memories section" id="memories">
+
+  <div class="section-heading">
+    <span class="eyebrow">LITTLE PIECES OF HAPPINESS</span>
+
+    <h2>Catch a little <em>love.</em></h2>
+
+    <p>
+      Tap the floating surprises. Each one reveals a little memory
+      just for you.
+    </p>
+  </div>
+
+  <div class="floating-playground" id="floatingPlayground">
+
+    <div class="playground-center" id="playgroundCenter">
+      <span>♡</span>
+      <p>Little surprises<br>are everywhere.</p>
+      <small>Choose a floating symbol!</small>
+    </div>
+
+    <!-- Each emoji will be replaced by its own square photo -->
+
+    <button class="float-item float-heart"
+        data-memory="0"
+        aria-label="Reveal birthday photo 1">♥</button>
+
+<button class="float-item float-rose"
+        data-memory="1"
+        aria-label="Reveal birthday photo 2">🌹</button>
+
+<button class="float-item float-gift"
+        data-memory="2"
+        aria-label="Reveal birthday photo 3">🎁</button>
+
+<button class="float-item float-butterfly"
+        data-memory="3"
+        aria-label="Reveal birthday photo 4">🦋</button>
+
+<button class="float-item float-bow"
+        data-memory="4"
+        aria-label="Reveal birthday photo 5">🎀</button>
+
+<button class="float-item float-stone"
+        data-memory="5"
+        aria-label="Reveal birthday photo 6">🧿</button>
+
+<button class="float-item float-chocolate"
+        data-memory="6"
+        aria-label="Reveal birthday photo 7">🍫</button>
+
+<button class="float-item float-envelope"
+        data-memory="8"
+        aria-label="Reveal birthday photo 9">💌</button>
+
+  </div>
+
+  <p class="memory-tip">
+    ♡ Every little symbol holds a memory. Keep exploring! ✨
+  </p>
+
+</section>
+
+
+
+    <!-- PERSONAL BIRTHDAY LETTER -->
+    <section class="letter-section section" id="letter">
+
+      <div class="letter-card">
+
+        <div class="letter-text">
+
+          <span class="eyebrow">A NOTE FROM ME TO YOU</span>
+
+          <h2>May be this message<br><em>is not the one I wanted</em></h2>
+
+          <div class="personal-message">
+
+            <p>
+              Happy 22nd Birthday to you!!
+            </p>
+
+            <p>
+              I have had lots of words and stuffs to say on this day, to make me'nd your day much more memorable, though it is to you. But recently I lost my words. The thing what I always love to say is stay happy and this girl always want to see you happy, her pray is always with you.
+            </p>
+
+            <p>
+              May this day returns to you for 1000 more time!!
+            </p>
+
+            <p>
+              Enjoy the day!!
+            </p>
+
+          </div>
+
+          <p class="signature">
+            Made with a little extra love <span>♥</span>
+          </p>
+
+        </div>
+
+        <div class="letter-photo-wrap">
+
+          <div class="letter-photo">
+            <img
+              src="assets/images/letter.jpeg"
+              alt="A lovely birthday memory"
+            >
+          </div>
+
+          <span class="photo-caption">a moment worth keeping ♡</span>
+          <span class="letter-sticker">you are<br>special ✿</span>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- FINAL BIRTHDAY WISH -->
+    <section class="finale section" id="finale">
+
+      <span class="eyebrow">ONE LAST LITTLE THING</span>
+
+      <h2>Make a wish. <em>Any wish.</em></h2>
+
+      <p>
+        Close your eyes for a second and imagine something wonderful.
+      </p>
+
+      <button class="wish-button" id="wishButton" type="button">
+        ✨ Now give it a chance ✨
+      </button>
+
+      <p class="wish-result" id="wishResult" aria-live="polite"></p>
+
+      <div class="final-hearts" aria-hidden="true">
+        ♡　✦　♥　✧　♡
+      </div>
+
+    </section>
+
+
+    <footer>
+      <p>Made especially for you, from Mampu <span>♥</span></p>
+      <p class="footer-small">
+        One birthday. A thousand little reasons to smile.
+      </p>
+    </footer>
+
+  </main>
+
+  <!-- CONFETTI ANIMATION -->
+  <div class="confetti-layer" id="confettiLayer" aria-hidden="true"></div>
+
+  <script src="./script.js"></script>
+
+</body>
+</html>
+

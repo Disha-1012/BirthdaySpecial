@@ -1,0 +1,1747 @@
+
+/* =========================================
+   1. GLOBAL STYLES
+========================================= */
+
+:root {
+  --pink: #ef8da9;
+  --pink-dark: #d95c83;
+  --pink-light: #fff0f5;
+  --cream: #fffaf5;
+  --purple: #b6a0db;
+  --ink: #493647;
+  --muted: #8c7a89;
+  --gold: #e9bd69;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  overflow-x: hidden;
+  color: var(--ink);
+  background: var(--cream);
+  font-family: "DM Sans", sans-serif;
+}
+
+[hidden] {
+  display: none !important;
+}
+
+button,
+a {
+  font: inherit;
+}
+
+button {
+  -webkit-tap-highlight-color: transparent;
+}
+
+button:focus-visible,
+a:focus-visible {
+  outline: 3px solid var(--pink-dark);
+  outline-offset: 4px;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+/* =========================================
+   2. INITIAL WELCOME SCREEN
+========================================= */
+
+.welcome-screen {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  overflow: hidden;
+  text-align: center;
+  background:
+    radial-gradient(ellipse at 10% 15%, #ffe1eb 0, transparent 40%),
+    radial-gradient(ellipse at 90% 85%, #e9ddff 0, transparent 40%),
+    linear-gradient(135deg, #fffafc, #fff0f5);
+}
+
+.welcome-glow {
+  position: absolute;
+  width: 360px;
+  height: 360px;
+  border-radius: 50%;
+  background: #f8c8db;
+  filter: blur(90px);
+  opacity: .4;
+  pointer-events: none;
+}
+
+.welcome-content {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: 580px;
+  animation: welcomeAppear 1s ease both;
+}
+
+.welcome-heart {
+  margin-bottom: 22px;
+  color: var(--pink-dark);
+  font-size: 76px;
+  line-height: 1;
+  animation: heartbeat 2s infinite;
+}
+
+.welcome-label {
+  margin: 0 0 18px;
+  color: var(--pink-dark);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 3px;
+}
+
+.welcome-content h1 {
+  margin: 0;
+  font-family: "Playfair Display", serif;
+  font-size: clamp(38px, 7vw, 65px);
+  line-height: 1.18;
+  letter-spacing: -1.4px;
+}
+
+.welcome-content h1 em {
+  color: var(--pink-dark);
+  font-weight: 500;
+}
+
+.welcome-description {
+  max-width: 390px;
+  margin: 22px auto 28px;
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.9;
+}
+
+.start-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  min-width: 180px;
+  padding: 17px 30px;
+  border: 1px solid #ffffffa0;
+  border-radius: 50px;
+  color: white;
+  background: linear-gradient(135deg, #7b1a73, #dd2891);
+  box-shadow: 0 12px 35px #d9699145;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform .3s, box-shadow .3s;
+}
+
+.start-button:hover {
+  transform: translateY(-4px) scale(1.04);
+  box-shadow: 0 18px 40px #d9699155;
+}
+
+.start-button:disabled {
+  opacity: .7;
+  cursor: wait;
+}
+
+.button-heart {
+  font-size: 18px;
+}
+
+.welcome-footer {
+  margin-top: 24px;
+  color: #ad93a5;
+  font-size: 11px;
+  letter-spacing: .5px;
+}
+
+.welcome-decoration {
+  position: absolute;
+  color: #d265b3;
+  pointer-events: none;
+  animation: float 4s ease-in-out infinite;
+}
+
+.decor-one {
+  top: 17%;
+  left: 13%;
+  color: #da9824;
+  font-size: 42px;
+}
+
+.decor-two {
+  top: 25%;
+  right: 13%;
+  color:#9e80eb;
+  font-size: 62px;
+  animation-delay: -1s;
+}
+
+.decor-three {
+  bottom: 17%;
+  left: 18%;
+  color: #6412f2;
+  font-size: 47px;
+  animation-delay: -2s;
+}
+
+.decor-four {
+  right: 16%;
+  bottom: 19%;
+  color:rgb(236, 124, 201);
+  font-size: 42px;
+  animation-delay: -.5s;
+}
+
+.welcome-screen.leaving {
+  animation: welcomeExit .6s ease forwards;
+  pointer-events: none;
+}
+
+#birthdayWebsite {
+  animation: websiteAppear .7s ease both;
+}
+
+/* =========================================
+   3. NAVIGATION
+========================================= */
+
+.topbar {
+  min-height: 76px;
+  max-width: 1200px;
+  margin: auto;
+  padding: 14px 30px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+}
+
+.brand {
+  color: var(--ink);
+  font-family: "Playfair Display", serif;
+  font-size: 23px;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.brand span,
+footer span,
+.signature span {
+  color: var(--pink-dark);
+}
+
+.topbar-note {
+  color: var(--muted);
+  font-size: 12px;
+}
+
+/* =========================================
+   4. SHARED SECTION STYLES
+========================================= */
+
+.section {
+  position: relative;
+  padding: 90px 24px;
+}
+
+.eyebrow {
+  display: inline-block;
+  color:blue;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  line-height: 1.8;
+}
+
+h2 {
+  font-family: "Playfair Display", serif;
+  font-weight: 600;
+}
+
+h2 em {
+  color: var(--pink-dark);
+  font-weight: 500;
+}
+
+/* =========================================
+   5. HERO SECTION
+========================================= */
+
+.hero {
+  min-height: 720px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  background:
+    radial-gradient(ellipse at 5% 10%, #ffe6ee 0, transparent 35%),
+    radial-gradient(ellipse at 95% 90%, #f1e8ff 0, transparent 35%);
+}
+
+.hero-copy {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: 760px;
+}
+
+.hero-heading {
+  margin: 20px 0 16px;
+  font-size: clamp(40px, 6vw, 65px);
+  line-height: 1.15;
+  letter-spacing: -1.3px;
+}
+
+.hero-subtitle {
+  max-width: 480px;
+  margin: auto;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.9;
+}
+
+/* =========================================
+   6. ENVELOPE STAGE
+========================================= */
+
+.envelope-stage {
+  position: relative;
+  isolation: isolate;
+  width: min(100%, 470px);
+  height: 350px;
+  margin: 18px auto 0;
+}
+
+.envelope-glow {
+  position: absolute;
+  z-index: -1;
+  left: 50%;
+  bottom: 10px;
+  width: 300px;
+  height: 180px;
+  border-radius: 50%;
+  transform: translateX(-50%);
+  background: #8769f4;
+  filter: blur(35px);
+}
+
+/* The envelope is the fixed base for all envelope layers. */
+
+.envelope {
+  position: absolute;
+  z-index: 3;
+  left: 50%;
+  bottom: 18px;
+  width: 270px;
+  height: 175px;
+  transform: translateX(-50%);
+}
+
+/* The back panel */
+
+.envelope-back {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  border-radius: 5px;
+  background: #d489b6;
+}
+
+/* The letter stays inside the envelope until the animation starts. */
+
+.letter {
+  position: absolute;
+  z-index: 2;
+  left: 10px;
+  right: 10px;
+  bottom: 5px;
+  height: 260px;
+  overflow: hidden;
+  border-radius: 7px 7px 3px 3px;
+  background: #fffdfb;
+  box-shadow: 0 8px 25px #8c526022;
+  transform: translateY(0);
+  transition:
+    bottom 1s cubic-bezier(.2, .8, .2, 1),
+    transform 1s cubic-bezier(.2, .8, .2, 1),
+    box-shadow .5s ease;
+}
+
+/* Letter text and image */
+
+.letter-content {
+  padding: 13px 10px;
+  text-align: center;
+}
+
+.letter-kicker {
+  display: block;
+  color: var(--pink-dark);
+  font-size: 8px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+}
+
+.hero-photo-frame {
+  position: relative;
+  width: 112px;
+  height: 112px;
+  margin: 12px auto 9px;
+  padding: 5px;
+  overflow: visible;
+  border: 1px solid #f3cada;
+  border-radius: 9px;
+  background: white;
+  box-shadow: 0 5px 18px #b66b8d18;
+}
+
+.hero-photo-frame img {
+  width: 100%;
+  height: 100%;
+  border-radius: 5px;
+  object-fit: cover;
+  object-position: center;
+}
+
+.photo-sparkle {
+  position: absolute;
+  top: -10px;
+  right: -12px;
+  color: var(--gold);
+  font-size: 22px;
+}
+
+.letter-content h3 {
+  margin: 8px 0 5px;
+  color:#de1878;
+  font-family: "Playfair Display", serif;
+  font-size: 22px;
+}
+
+.letter-content > p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 10px;
+  line-height: 1.5;
+}
+
+/* Opening flap */
+
+.envelope-flap {
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+  background: #e9a7bd;
+  clip-path: polygon(0 0, 100% 0, 50% 66%);
+  transform-origin: top center;
+  transform: rotateX(0deg);
+  transition:
+    transform .65s ease,
+    z-index 0s linear .3s;
+  backface-visibility: visible;
+}
+
+/* Three separate panels make a complete envelope front. */
+
+.envelope-front-left,
+.envelope-front-right,
+.envelope-front-bottom {
+  position: absolute;
+  z-index: 4;
+  inset: 0;
+  pointer-events: none;
+}
+
+.envelope-front-left {
+  background: #f3b5c9;
+  clip-path: polygon(0 0, 52% 57%, 0 100%);
+}
+
+.envelope-front-right {
+  background: #f7c2d3;
+  clip-path: polygon(100% 0, 48% 57%, 100% 100%);
+}
+
+.envelope-front-bottom {
+  background: #f7bfd1;
+  clip-path: polygon(0 100%, 50% 56%, 100% 100%);
+}
+
+/* The seal stays on top before the envelope opens. */
+
+.envelope-seal {
+  position: absolute;
+  z-index: 6;
+  top: 83px;
+  left: 50%;
+  width: 32px;
+  height: 32px;
+  display: grid;
+  place-items: center;
+  transform: translateX(-50%);
+  border: 2px solid #fff4f8;
+  border-radius: 50%;
+  color: white;
+  background: var(--pink-dark);
+  box-shadow: 0 3px 10px #a34f7025;
+  transition: opacity .25s, transform .25s;
+}
+
+/* OPEN ANIMATION: flap opens and the letter rises above it. */
+
+.envelope.open .envelope-flap {
+  transform: rotateX(180deg);
+  z-index: 1;
+}
+
+.envelope.open .envelope-seal {
+  opacity: 0;
+  transform: translateX(-50%) scale(.5);
+}
+
+.envelope.open .letter {
+  z-index: 3;
+  bottom: 105px;
+  transform: translateY(-8px);
+  box-shadow: 0 18px 35px #8c52602a;
+  transition-delay: .12s;
+}
+
+.envelope.open .envelope-front-left,
+.envelope.open .envelope-front-right,
+.envelope.open .envelope-front-bottom {
+  z-index: 4;
+}
+
+/* Caption */
+
+.hero-caption {
+  margin: 4px 0 0;
+  color: #a98da0;
+  font-size: 11px;
+  line-height: 1.8;
+}
+
+/* =========================================
+   7. BIRTHDAY CAKE
+========================================= */
+
+.cake {
+  position: absolute;
+  z-index: 5;
+  right: -12px;
+  bottom: 36px;
+  width: 112px;
+  height: 150px;
+  opacity: 0;
+  transform: translate(20px, 20px) scale(.6);
+  transform-origin: bottom center;
+  pointer-events: none;
+  transition:
+    opacity .5s ease,
+    transform .65s cubic-bezier(.2, .8, .2, 1);
+}
+
+.cake.show {
+  opacity: 1;
+  transform: translate(0, 0) scale(1);
+}
+
+.cake-bottom,
+.cake-middle,
+.cake-top {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  border-radius: 8px 8px 5px 5px;
+  box-shadow: inset 0 -5px #0000000a;
+}
+
+.cake-bottom {
+  bottom: 28px;
+  width: 100px;
+  height: 42px;
+  background: #eaa1b9;
+}
+
+.cake-middle {
+  bottom: 62px;
+  width: 82px;
+  height: 34px;
+  background: #fff0cb;
+}
+
+.cake-middle span {
+  position: absolute;
+  top: 8px;
+  left: 0;
+  right: 0;
+  color: #7a3737;
+  font-size: 11px;
+  letter-spacing: 2px;
+}
+
+.cake-top {
+  bottom: 89px;
+  width: 64px;
+  height: 26px;
+  background: #eaa1b9;
+}
+
+.cake-plate {
+  position: absolute;
+  bottom: 19px;
+  left: 50%;
+  width: 112px;
+  height: 12px;
+  transform: translateX(-50%);
+  border-radius: 50%;
+  background: #d6c2e9;
+}
+
+.cake-candle {
+  position: absolute;
+  z-index: 2;
+  bottom: 112px;
+  left: 52px;
+  width: 7px;
+  height: 25px;
+  border-radius: 3px;
+  background: repeating-linear-gradient(
+    135deg,
+    #fff 0 4px,
+    #e9a3bb 4px 8px
+  );
+}
+
+.flame {
+  position: absolute;
+  bottom: 22px;
+  left: -2px;
+  width: 11px;
+  height: 16px;
+  border-radius: 50% 50% 45% 45%;
+  background: #ffbf59;
+  box-shadow: 0 0 15px #ffbf5977;
+  animation: flicker .7s infinite alternate;
+}
+
+.cake-spark {
+  position: absolute;
+  color: var(--gold);
+  animation: twinkle 1.8s infinite alternate;
+}
+
+.cake-spark-one {
+  top: 15px;
+  left: 2px;
+  font-size: 20px;
+}
+
+.cake-spark-two {
+  top: 35px;
+  right: -5px;
+  font-size: 24px;
+}
+
+/* =========================================
+   8. FLOATING HERO DECORATIONS
+========================================= */
+
+.hero-decoration {
+  position: absolute;
+  pointer-events: none;
+  animation: float 4s ease-in-out infinite;
+}
+
+.decoration-heart {
+  top: 24%;
+  left: 13%;
+  color: #d3346c;
+  font-size: 50px;
+}
+
+.decoration-star {
+  top: 29%;
+  right: 15%;
+  color: #e19d15;
+  font-size: 36px;
+  animation-delay: -1s;
+}
+
+.decoration-spark {
+  bottom: 15%;
+  left: 17%;
+  color: #530adb;
+  font-size: 45px;
+  animation-delay: -2s;
+}
+
+.decoration-flower {
+  right: 14%;
+  bottom: 18%;
+  color: #e94d88;
+  font-size: 40px;
+}
+
+
+/* =========================================
+   9. MEMORIES SECTION — UPDATED
+   Photos replace emojis in their exact positions
+========================================= */
+
+.memories {
+  padding-top: 90px;
+  padding-bottom: 90px;
+  text-align: center;
+  background: #fff7fa;
+}
+
+.section-heading h2 {
+  margin: 14px 0;
+  font-size: clamp(34px, 4.5vw, 49px);
+  line-height: 1.2;
+}
+
+.section-heading > p {
+  max-width: 490px;
+  margin: auto;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.9;
+}
+
+/* Main memories playground */
+
+.floating-playground {
+  position: relative;
+  isolation: isolate;
+  width: min(100%, 950px);
+  min-height: 390px;
+  margin: 30px auto 0;
+  padding: 15px;
+  overflow: hidden;
+  border: 1px solid #f3c0cf;
+  border-radius: 30px;
+
+  background:
+    radial-gradient(circle at 20% 25%, #ffe7ef 0, transparent 35%),
+    radial-gradient(circle at 80% 70%, #eee6fc 0, transparent 40%),
+    #fffdfd;
+}
+
+/* Decorative centre message */
+
+.playground-center {
+  position: absolute;
+  z-index: 0;
+  inset: 0;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  pointer-events: none;
+  transition: opacity .3s ease;
+}
+
+.playground-center span {
+  color: var(--pink);
+  font-size: 49px;
+  animation: heartbeat 1.8s infinite;
+}
+
+.playground-center p {
+  margin: 6px 0;
+  font-family: "Playfair Display", serif;
+  font-size: 20px;
+  line-height: 1.5;
+}
+
+.playground-center small {
+  margin-top: 5px;
+  color: var(--muted);
+  font-size: 10px;
+}
+
+/* =========================================
+   FLOATING EMOJI BUTTONS
+========================================= */
+
+.float-item {
+  position: absolute;
+  z-index: 3;
+
+  display: grid;
+  place-items: center;
+
+  padding: 0;
+  border: 1px solid #c8c1f1b5;
+
+  cursor: pointer;
+  box-shadow: 0 10px 25px #b66b8d1a;
+
+  animation: float 4s ease-in-out infinite;
+
+  transition:
+    box-shadow .25s ease,
+    filter .25s ease,
+    transform .3s ease;
+}
+
+.float-item:hover {
+  filter: brightness(1.04);
+  box-shadow: 0 14px 30px #b66b8d30;
+}
+
+/* Individual emoji positions */
+
+.float-heart {
+  top: 13%;
+  left: 9%;
+  width: 55px;
+  height: 55px;
+  border-radius: 50%;
+  color: white;
+  background: #dc6488;
+  font-size: 29px;
+}
+
+.float-rose {
+  top: 75%;
+  left: 40%;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  color: #bb9140;
+  background: #fff0cb;
+  font-size: 27px;
+  animation-delay: -1s;
+}
+
+.float-gift {
+  top: 12%;
+  right: 10%;
+  width: 57px;
+  height: 57px;
+  border-radius: 18px;
+  background: #f7d9e4;
+  font-size: 29px;
+  animation-delay: -1.7s;
+}
+
+.float-butterfly {
+  top: 8%;
+  left: 48%;
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  background: #e8defa;
+  font-size: 24px;
+  animation-delay: -2s;
+}
+
+.float-bow {
+  right: 20%;
+  bottom: 10%;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  color: #e5aa62;
+  background: #fce8d8;
+  font-size: 34px;
+}
+
+.float-stone {
+  right: 20%;
+  bottom: 40%;
+  width: 54px;
+  height: 54px;
+  border-radius: 17px;
+  background: white;
+  font-size: 26px;
+  animation-delay: -2.4s;
+}
+
+.float-chocolate {
+  bottom: 10%;
+  left: 8%;
+  width: 43px;
+  height: 43px;
+  border-radius: 50%;
+  color: #b496d4;
+  background: #eed6fd;
+  font-size: 26px;
+}
+
+
+.float-envelope {
+  top: 35%;
+  left: 22%;
+  width: 46px;
+  height: 46px;
+  border-radius: 15px;
+  background: rgb(251, 252, 253);
+  font-size: 23px;
+}
+
+/* =========================================
+   PHOTO REPLACES CLICKED EMOJI
+========================================= */
+
+/*
+   JavaScript must add the "revealed" class to the
+   clicked button and put an <img> inside it.
+
+   The existing position properties (top, left,
+   right and bottom) remain unchanged.
+*/
+
+.float-item.revealed {
+  width: 104px;
+  height: 104px;
+  padding: 4px;
+
+  border: 1px solid white;
+  border-radius: 12px;
+
+  background: rgb(255, 255, 255);
+  box-shadow:
+    0 7px 24px #b66b8d2c,
+    0 0 0 1px #f3d9e4;
+
+  font-size: 0;
+  line-height: 0;
+
+  animation: memoryPhotoAppear .45s ease both;
+
+  cursor: default;
+  overflow: hidden;
+}
+
+/* Square photo stays inside the original emoji button */
+
+.float-item.revealed img {
+  display: block;
+  width: 100%;
+  height: 100%;
+
+  max-width: none;
+  object-fit: cover;
+  object-position: center;
+
+  border-radius: 7px;
+}
+
+/* Stop floating after the emoji becomes a photo */
+
+.float-item.revealed:hover {
+  filter: none;
+  box-shadow:
+    0 10px 28px #b66b8d35,
+    0 0 0 2px #f2b5cb;
+}
+
+/* Remove the central cards/gallery if old markup remains */
+
+.memory-gallery {
+  display: none !important;
+}
+
+/* The centre text stays behind the floating memories */
+
+.floating-playground.has-memories .playground-center {
+  opacity: 0;
+}
+
+/*
+   IMPORTANT:
+   Do not increase the playground's top padding
+   when a memory is revealed. Photos stay at their
+   original emoji coordinates.
+*/
+
+.floating-playground.has-memories {
+  padding-top: 15px;
+}
+
+.memory-tip {
+  margin-top: 18px;
+  color: var(--muted);
+  font-size: 11px;
+  line-height: 1.8;
+}
+
+/* Photo reveal animation */
+
+@keyframes memoryPhotoAppear {
+  from {
+    opacity: 0;
+    transform: scale(.55) rotate(-8deg);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1) rotate(0deg);
+  }
+}
+
+/* =========================================
+   10. PERSONAL LETTER SECTION
+========================================= */
+
+.letter-section {
+  padding-top: 100px;
+  padding-bottom: 100px;
+}
+
+.letter-card {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1.25fr .75fr;
+  align-items: center;
+  gap: 50px;
+  max-width: 1000px;
+  margin: auto;
+  padding: 60px;
+  border: 1px solid #f6e6ec;
+  border-radius: 30px;
+  background: white;
+  box-shadow: 0 22px 70px #944e6f1f;
+}
+
+.letter-text h2 {
+  margin: 14px 0 25px;
+  font-size: clamp(32px, 4vw, 44px);
+  line-height: 1.2;
+}
+
+.personal-message p {
+  margin: 0 0 15px;
+  color: #7e6c7a;
+  font-size: 13px;
+  line-height: 2;
+}
+
+.signature {
+  margin-top: 26px;
+  font-family: "Playfair Display", serif;
+  font-size: 17px;
+  font-style: italic;
+}
+
+.letter-photo-wrap {
+  position: relative;
+  justify-self: center;
+  width: 100%;
+  max-width: 290px;
+  padding: 12px 12px 39px;
+  border: 1px solid #f1e6e9;
+  background: white;
+  box-shadow: 0 12px 35px #a7788c24;
+  transform: rotate(3deg);
+}
+
+.letter-photo {
+  width: 100%;
+  aspect-ratio: 2 / 3;
+  overflow: hidden;
+  background: #fbe8ef;
+}
+
+.letter-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform .6s ease;
+}
+
+.letter-photo-wrap:hover img {
+  transform: scale(1.06);
+}
+
+.photo-caption {
+  position: absolute;
+  right: 8px;
+  bottom: 12px;
+  left: 8px;
+  color: #e882cc;
+  text-align: center;
+  font-family: "Playfair Display", serif;
+  font-size: 13px;
+}
+
+.letter-sticker {
+  position: absolute;
+  top: -24px;
+  right: -23px;
+  width: 75px;
+  height: 75px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  color: #a66b88;
+  background: #fbe3eb;
+  font-size: 11px;
+  text-align: center;
+  line-height: 1.5;
+  transform: rotate(10deg);
+}
+
+/* =========================================
+   11. FINAL WISH SECTION
+========================================= */
+
+.finale {
+  padding-top: 95px;
+  padding-bottom: 90px;
+  text-align: center;
+  background: linear-gradient(180deg, #fff3f7, #fbf3ff);
+}
+
+.finale h2 {
+  margin: 17px 0 14px;
+  font-size: clamp(34px, 4.5vw, 49px);
+  line-height: 1.2;
+}
+
+.finale > p:not(.wish-result) {
+  max-width: 490px;
+  margin: auto;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.9;
+}
+
+.wish-button {
+  margin-top: 26px;
+  padding: 15px 25px;
+  border: none;
+  border-radius: 50px;
+  color: white;
+  background: linear-gradient(135deg, #ec91ad, #d96991);
+  box-shadow: 0 8px 25px #d969913d;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform .25s ease;
+}
+
+.wish-button:hover {
+  transform: translateY(-3px);
+}
+
+.wish-result {
+  min-height: 30px;
+  margin-top: 23px;
+  padding: 0 15px;
+  color: var(--pink-dark);
+  font-family: "Playfair Display", serif;
+  font-size: 20px;
+  line-height: 1.7;
+}
+
+.final-hearts {
+  margin-top: 30px;
+  color: #dba0b7;
+  font-size: 22px;
+  letter-spacing: 6px;
+  animation: float 4s infinite ease-in-out;
+}
+
+footer {
+  padding: 26px 20px;
+  text-align: center;
+  background: #fffafc;
+}
+
+footer p {
+  margin: 5px 0;
+  font-family: "Playfair Display", serif;
+  font-size: 14px;
+}
+
+.footer-small {
+  color: #aa98a5;
+  font-family: "DM Sans", sans-serif;
+  font-size: 10px;
+}
+
+/* =========================================
+   12. CONFETTI
+========================================= */
+
+.confetti-layer {
+  position: fixed;
+  inset: 0;
+  z-index: 400;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.confetti-piece {
+  position: absolute;
+  top: -20px;
+  width: 9px;
+  height: 13px;
+  border-radius: 2px;
+  animation: confettiFall var(--duration, 3s) linear forwards;
+}
+
+/* =========================================
+   13. ANIMATIONS
+========================================= */
+
+@keyframes float {
+  0%, 100% {
+    translate: 0 0;
+  }
+
+  50% {
+    translate: 0 -11px;
+  }
+}
+
+@keyframes heartbeat {
+  0%, 100% {
+    transform: scale(1);
+  }
+
+  20% {
+    transform: scale(1.12);
+  }
+
+  40% {
+    transform: scale(1);
+  }
+
+  60% {
+    transform: scale(1.08);
+  }
+}
+
+@keyframes flicker {
+  from {
+    transform: rotate(-6deg) scale(.95);
+  }
+
+  to {
+    transform: rotate(7deg) scale(1.08);
+  }
+}
+
+@keyframes twinkle {
+  from {
+    opacity: .45;
+    transform: scale(.8);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1.2);
+  }
+}
+
+@keyframes welcomeAppear {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes welcomeExit {
+  to {
+    opacity: 0;
+    visibility: hidden;
+    transform: scale(1.02);
+  }
+}
+
+@keyframes websiteAppear {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes confettiFall {
+  to {
+    transform: translate3d(var(--drift, 0px), 105vh, 0)
+      rotate(800deg);
+    opacity: .8;
+  }
+}
+
+/* =========================================
+   14. TABLET AND MOBILE
+========================================= */
+
+@media (max-width: 760px) {
+  .welcome-content h1 {
+    font-size: clamp(37px, 9vw, 54px);
+  }
+
+  .welcome-decoration {
+    opacity: .65;
+  }
+
+  .decor-one {
+    top: 12%;
+    left: 5%;
+    font-size: 30px;
+  }
+
+  .decor-two {
+    top: 19%;
+    right: 4%;
+    font-size: 43px;
+  }
+
+  .decor-three {
+    bottom: 10%;
+    left: 5%;
+    font-size: 34px;
+  }
+
+  .decor-four {
+    right: 5%;
+    bottom: 12%;
+    font-size: 31px;
+  }
+
+  .topbar {
+    min-height: 66px;
+    padding: 12px 18px;
+  }
+
+  .brand {
+    font-size: 20px;
+  }
+
+  .topbar-note {
+    max-width: 135px;
+    text-align: right;
+    font-size: 10px;
+  }
+
+  .section {
+    padding: 72px 18px;
+  }
+
+  .hero {
+    min-height: 680px;
+  }
+
+  .hero-heading {
+    font-size: clamp(38px, 9vw, 55px);
+  }
+
+  .envelope-stage {
+    height: 335px;
+  }
+
+  .envelope {
+    width: 235px;
+    height: 155px;
+  }
+
+  .envelope.open .letter {
+    bottom: 100px;
+  }
+
+  .hero-photo-frame {
+    width: 102px;
+    height: 102px;
+  }
+
+  .letter-content h3 {
+    font-size: 20px;
+  }
+
+  .cake {
+    right: -8px;
+    bottom: 32px;
+    transform-origin: bottom right;
+  }
+
+  .cake.show {
+    transform: translate(0, 0) scale(.78);
+  }
+
+  .hero-decoration {
+    opacity: .5;
+  }
+
+  .decoration-heart {
+    left: 3%;
+    font-size: 32px;
+  }
+
+  .decoration-star {
+    right: 3%;
+    font-size: 27px;
+  }
+
+  .decoration-spark {
+    left: 4%;
+    font-size: 31px;
+  }
+
+  .decoration-flower {
+    right: 4%;
+    font-size: 29px;
+  }
+
+  .floating-playground {
+    min-height: 350px;
+    border-radius: 24px;
+  }
+
+  .playground-center p {
+    font-size: 17px;
+  }
+
+  .float-heart {
+    left: 5%;
+    top: 11%;
+  }
+
+  .float-gift {
+    right: 20%;
+    top: 10%;
+  }
+
+  .float-envelope {
+    left: 12%;
+    top: 37%;
+  }
+
+  .float-sparkle {
+    right: 16%;
+    bottom: 11%;
+  }
+
+  .float-cake {
+    right: 4%;
+    bottom: 26%;
+  }
+
+  .float-star-two {
+    right: 33%;
+    top: 63%;
+  }
+
+  /* Revealed photos remain small on mobile */
+
+  .float-item.revealed {
+    width: 82px;
+    height: 82px;
+    padding: 4px;
+    border-radius: 10px;
+  }
+
+  .float-item.revealed img {
+    border-radius: 6px;
+  }
+
+  .letter-card {
+    grid-template-columns: 1fr;
+    gap: 38px;
+    padding: 35px 25px;
+    border-radius: 24px;
+  }
+
+  .letter-photo-wrap {
+    width: min(100%, 260px);
+  }
+}
+
+@media (max-width: 390px) {
+  .welcome-description {
+    font-size: 12px;
+  }
+
+  .envelope-stage {
+    height: 315px;
+  }
+
+  .envelope {
+    width: 205px;
+    height: 140px;
+  }
+
+  .envelope.open .letter {
+    bottom: 95px;
+  }
+
+  .hero-photo-frame {
+    width: 92px;
+    height: 92px;
+  }
+
+  .cake {
+    right: -13px;
+    transform-origin: bottom right;
+  }
+
+  .cake.show {
+    transform: translate(0, 0) scale(.68);
+  }
+
+  .floating-playground {
+    padding-right: 8px;
+    padding-left: 8px;
+  }
+
+  .float-item.revealed {
+    width: 70px;
+    height: 70px;
+    padding: 3px;
+    border-radius: 9px;
+  }
+
+  .float-item.revealed img {
+    border-radius: 5px;
+  }
+
+  .letter-card {
+    padding: 28px 20px;
+  }
+}
+
+/* Accessibility: respect reduced-motion preferences */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: .01ms !important;
+  }
+}
+
+
+/* =========================================
+   UPDATED MEMORIES: PHOTO REPLACES EMOJI
+========================================= */
+
+/* The playground is the positioning reference
+   for every emoji and its revealed photo. */
+
+.floating-playground {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+}
+
+/* Hide the old central gallery if it exists. */
+
+.floating-playground .memory-gallery {
+  display: none !important;
+}
+
+/* Hide the centre message when a memory is opened. */
+
+.floating-playground.has-memories .playground-center {
+  opacity: 0;
+}
+
+/* Hide the emoji after its photo is revealed. */
+
+.float-item.memory-emoji-hidden {
+  visibility: hidden;
+  opacity: 0;
+  pointer-events: none;
+  animation: none;
+}
+
+/* Each photo occupies the emoji's original position. */
+
+.memory-photo-block {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 3px;
+
+  width: 112px;
+  height: 112px;
+  padding: 4px;
+
+  overflow: visible;
+  border: 2px solid #eedce3;
+  border-radius: 10px;
+  background: #fffdfd;
+
+  box-shadow: 0 6px 18px #b66b8d30;
+
+  opacity: 0;
+  transform: scale(.55) rotate(-7deg);
+  transform-origin: center;
+
+  animation: memorySquareReveal .45s cubic-bezier(.2, .8, .2, 1)
+    forwards;
+}
+
+/* The image itself stays square and cropped. */
+
+.memory-photo-block img {
+  display: block;
+  flex: 0 0 auto;
+
+  width: 100%;
+  height: 100%;
+
+  min-width: 0;
+  min-height: 0;
+
+  border-radius: 5px;
+  object-fit: cover;
+  object-position: center;
+}
+
+/* Captions appear just below the square, not
+   over the image. */
+
+.memory-photo-caption {
+  position: absolute;
+  top: calc(100% + 5px);
+  left: 50%;
+
+  width: max-content;
+  max-width: 115px;
+
+  padding: 4px 6px;
+  border: 1px solid #f4dce6;
+  border-radius: 6px;
+
+  color: #805d72;
+  background: #fffafc;
+
+  font-family: "DM Sans", sans-serif;
+  font-size: 9px;
+  line-height: 1.4;
+  text-align: center;
+  overflow-wrap: anywhere;
+
+  box-shadow: 0 3px 10px #b66b8d12;
+
+  opacity: 0;
+  pointer-events: none;
+
+  transition: opacity .2s ease;
+}
+
+/* Show the caption when the photo is hovered. */
+
+.memory-photo-block:hover,
+.memory-photo-block:focus-within {
+  z-index: 10 !important;
+}
+
+.memory-photo-block:hover .memory-photo-caption {
+  opacity: 1;
+}
+
+/* A small fallback if a photo path is incorrect. */
+
+.memory-photo-fallback {
+  display: grid;
+  width: 100%;
+  height: 100%;
+  place-items: center;
+
+  border-radius: 5px;
+  color: #d95c83;
+  background: #fff0f5;
+
+  font-size: 27px;
+}
+
+.memory-photo-error {
+  border-color: #f1c2d4;
+}
+
+/* Reveal animation. */
+
+@keyframes memorySquareReveal {
+  0% {
+    opacity: 0;
+    transform: scale(.55) rotate(-7deg);
+  }
+
+  70% {
+    opacity: 1;
+    transform: scale(1.08) rotate(2deg);
+  }
+
+  100% {
+    opacity: 1;
+    transform: scale(1) rotate(0);
+  }
+}
+
+/* Smaller square blocks on mobile. */
+
+@media (max-width: 760px) {
+  .memory-photo-block {
+    width: 76px;
+    height: 76px;
+    padding: 3px;
+    border-radius: 9px;
+  }
+
+  .memory-photo-caption {
+    max-width: 105px;
+    font-size: 8px;
+  }
+}
+
+@media (max-width: 390px) {
+  .memory-photo-block {
+    width: 64px;
+    height: 64px;
+    padding: 3px;
+    border-radius: 8px;
+  }
+}
+
+/* Respect reduced-motion settings. */
+
+@media (prefers-reduced-motion: reduce) {
+  .memory-photo-block {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+}
+
