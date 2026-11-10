@@ -64,7 +64,5 @@ GitHub repository and using the project root as the deployment root.
 
 No build command or output directory is required.
 
-## 💗 Made With Love
-
-A personal birthday surprise made to celebrate memories, friendship,
-and another beautiful year of life.
+## Author
+Disha Dutta
