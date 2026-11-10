@@ -75,7 +75,7 @@ const birthdayAudio = new Audio("assets/audio/birthday-song.mp3");
 
 // Music settings
 birthdayAudio.loop = true;
-birthdayAudio.volume = 1;
+birthdayAudio.volume = 0.5;
 birthdayAudio.preload = "auto";
 
 let birthdayOpened = false;
