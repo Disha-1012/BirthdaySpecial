@@ -1137,8 +1137,8 @@ h2 em {
   border: none;
   border-radius: 50px;
   color: white;
-  background: linear-gradient(135deg, #ec91ad, #d96991);
-  box-shadow: 0 8px 25px #d969913d;
+  background: linear-gradient(135deg, #7b1a73, #dd2891);
+  box-shadow: 0 12px 35px #d9699145;
   font-size: 13px;
   font-weight: 700;
   cursor: pointer;
